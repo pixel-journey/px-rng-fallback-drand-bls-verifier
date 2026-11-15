@@ -1,33 +1,19 @@
 # Worked examples — drand time gate
 
-`T0 = 1_700_000_000`. Randomness is 32 bytes hex (`11` × 32). Signature field is 48 bytes hex in tests (`22` × 48) — **structural only, not real BLS verification**.
+Bet at `T0`. Beacon randomness `11`×32, signature structural `22`×48.
 
-## Resolve after bet
-
-Open bet at `T0`. Beacon `publishedTs: T0 + 1` → phase `resolved`, round 100, randomness stored.
+## Accept / refuse
 
 | publishedTs | Result |
 | --- | --- |
+| T0 + 1 | resolved, round 100 |
 | T0 | not after bet |
 | T0 - 1 | not after bet |
-| T0 + 1 | ok |
 
-## Digest stand-in
+Optional `expectedDigest`: mismatch → `bad signature`; match accepts.
 
-Optional `expectedDigest` must match `beaconDigest(beacon)`. Wrong digest (`00` × 32) → `bad signature`. Matching digest accepts.
+Second resolve → `already resolved`. Short randomness → `bad randomness`. Bad player name / negative betTs refused on open.
 
-This is **not** BLS12-381 verification. Production must verify the League of Entropy signature properly.
+`uint32FromRandomness` first four bytes: `0000002a…` → `0x2a`.
 
-## Once-only
-
-Second `verifyAndResolve` → `already resolved`.
-
-## Shape checks
-
-| Case | Error |
-| --- | --- |
-| randomness `abcd` | bad randomness |
-| player `Bad` | bad player |
-| betTs -1 | bad betTs |
-
-`uint32FromRandomness("0000002a" + …)` → `0x2a`.
+**Not real BLS verification** — structural digest stand-in only. Live League of Entropy verification is out of scope.
