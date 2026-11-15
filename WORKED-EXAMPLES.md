@@ -1,19 +1,25 @@
-# Worked examples — drand time gate
+# Worked examples — drand beacon gate
 
-Bet at `T0`. Beacon randomness `11`×32, signature structural `22`×48.
+`T0 = 1_700_000_000`. Randomness `11`×32, signature `22`×48.
 
-## Accept / refuse
+## openBet
 
-| publishedTs | Result |
+Phase `open`, round null. Player `Bad` / betTs `-1` refused.
+
+## verifyAndResolve
+
+| Beacon publishedTs | Result |
 | --- | --- |
-| T0 + 1 | resolved, round 100 |
-| T0 | not after bet |
-| T0 - 1 | not after bet |
+| T0 + 1 | resolved, round 100, randomness stored |
+| T0 (exact) | `not after bet` |
+| T0 - 1 | `not after bet` |
 
-Optional `expectedDigest`: mismatch → `bad signature`; match accepts.
+`expectedDigest` wrong → `bad signature`. Matching `beaconDigest(beacon)` accepts.
 
-Second resolve → `already resolved`. Short randomness → `bad randomness`. Bad player name / negative betTs refused on open.
+Second resolve → `already resolved`. Short randomness `abcd` → `bad randomness`.
 
-`uint32FromRandomness` first four bytes: `0000002a…` → `0x2a`.
+## uint32FromRandomness
 
-**Not real BLS verification** — structural digest stand-in only. Live League of Entropy verification is out of scope.
+`0000002a` + 28 bytes of `11` → **0x2a**.
+
+Teaching gate only — not a live BLS verify against the League of Entropy network.

@@ -1,7 +1,5 @@
 # Sources
 
-| Source | Why |
-| --- | --- |
-| [drand.love](https://drand.love/) | League of Entropy / drand overview |
-| [drand GitHub](https://github.com/drand/drand) | Protocol and APIs |
-| [docs.wax.io](https://docs.wax.io/) | Prefer orng.wax on WAX when possible |
+- [drand](https://drand.love/) — public randomness beacons
+- [docs.wax.io](https://docs.wax.io/) — Antelope time and action context
+- Related labs: [future-block TAPOS](https://github.com/pixel-journey/px-rng-fallback-future-block-tapos), [multi-oracle quorum](https://github.com/pixel-journey/px-rng-fallback-multi-oracle-quorum)

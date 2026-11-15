@@ -1,5 +1,5 @@
 # Security
 
-Closed: time gate, once-only, bad randomness length, bad player/betTs, optional digest mismatch.
+Closed in tests: pre-bet beacon, exact betTs, second resolve, short randomness, bad player/betTs.
 
-Not closed: no BLS verify, no HTTP fetch, no chain auth, signature bytes are ignored except via the optional digest helper.
+Not closed: cryptographic BLS verify, network fetch, group key rotation.

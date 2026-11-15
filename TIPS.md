@@ -1,5 +1,5 @@
 # Tips
 
-- Strict `>` on timestamps, not `>=`.
-- Never claim BLS is verified until a real pairing check is in the tests.
-- Prefer `orng.wax` on WAX when available; drand is a cross-domain fallback pattern.
+- Never accept a beacon with publishedTs ≤ betTs — same-second leakage is a fairness bug.
+- Resolve is once-only; store randomness on the bet row before any payout math.
+- Real deployments need actual BLS verification against the current group public key; this lab only models the time and digest gates.

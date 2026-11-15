@@ -1,9 +1,11 @@
-# Education — drand after-bet gate
+# Education — post-bet drand beacon acceptance
 
-Accept a published randomness beacon only if its publish time is **strictly after** the bet. Optional expected digest stands in for signature checks in this lab.
+A bet at time `betTs` may only accept a beacon whose `publishedTs` is **strictly later**. Optional digest check stands in for signature verification in this lab.
 
 ## Outcomes
 
-1. Show equal or earlier publish time is refused.
+1. Show exact betTs is refused (must be after).
 2. Show once-only resolve.
-3. State clearly this is not production BLS.
+3. Show first four randomness bytes as a uint32 sample.
+
+Numbers: [WORKED-EXAMPLES.md](WORKED-EXAMPLES.md).
