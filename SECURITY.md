@@ -1,9 +1,5 @@
-# Security notes — drand lab
+# Security
 
-| Mitigated | Behavior |
-| --- | --- |
-| publishedTs ≤ betTs | refused |
-| Bad hex / round | refused |
-| Double resolve | refused |
+Closed: time gate, once-only, bad randomness length, bad player/betTs, optional digest mismatch.
 
-**Not mitigated here:** real BLS forgery. Treat signature checks as educational only.
+Not closed: no BLS verify, no HTTP fetch, no chain auth, signature bytes are ignored except via the optional digest helper.

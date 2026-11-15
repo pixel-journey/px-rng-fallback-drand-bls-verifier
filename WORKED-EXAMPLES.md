@@ -1,21 +1,33 @@
-# Worked examples — drand gate
+# Worked examples — drand time gate
 
-## Example A — after bet
+`T0 = 1_700_000_000`. Randomness is 32 bytes hex (`11` × 32). Signature field is 48 bytes hex in tests (`22` × 48) — **structural only, not real BLS verification**.
 
-betTs 1000, publishedTs 1001 → resolve ok.
+## Resolve after bet
 
-## Example B — not after
+Open bet at `T0`. Beacon `publishedTs: T0 + 1` → phase `resolved`, round 100, randomness stored.
 
-publishedTs 1000 or 999 → `not after bet`.
+| publishedTs | Result |
+| --- | --- |
+| T0 | not after bet |
+| T0 - 1 | not after bet |
+| T0 + 1 | ok |
 
-## Example C — already resolved
+## Digest stand-in
 
-Second verify → `already resolved`.
+Optional `expectedDigest` must match `beaconDigest(beacon)`. Wrong digest (`00` × 32) → `bad signature`. Matching digest accepts.
 
-## Example D — bad shape
+This is **not** BLS12-381 verification. Production must verify the League of Entropy signature properly.
 
-Randomness not 64 hex → refused.
+## Once-only
 
-## Example E — optional digest
+Second `verifyAndResolve` → `already resolved`.
 
-If `expectedDigest` is supplied and mismatches `beaconDigest`, reason `bad signature` (stand-in).
+## Shape checks
+
+| Case | Error |
+| --- | --- |
+| randomness `abcd` | bad randomness |
+| player `Bad` | bad player |
+| betTs -1 | bad betTs |
+
+`uint32FromRandomness("0000002a" + …)` → `0x2a`.

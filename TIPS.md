@@ -1,5 +1,5 @@
-# Tips — external beacons
+# Tips
 
-- Commit the bet **before** the beacon round you will use.
-- Prefer native [orng.wax](https://github.com/worldwide-asset-exchange/wax-orng) when building on WAX.
-- Related: [commit-reveal](https://github.com/pixel-journey/px-rng-fallback-commit-reveal), [multi-oracle](https://github.com/pixel-journey/px-rng-fallback-multi-oracle-quorum).
+- Strict `>` on timestamps, not `>=`.
+- Never claim BLS is verified until a real pairing check is in the tests.
+- Prefer `orng.wax` on WAX when available; drand is a cross-domain fallback pattern.

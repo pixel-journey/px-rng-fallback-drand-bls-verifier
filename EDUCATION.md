@@ -1,28 +1,28 @@
-# Education — drand round after the bet
-
-> **Rung:** `npm test` passes. Prefer [orng.wax](https://github.com/worldwide-asset-exchange/wax-orng) on WAX.  
-> Structural gate only: **publishedTs must be strictly greater than betTs**. Signature is a **hash stand-in**, not BLS12-381.
-
-## What you should be able to do
-
-| Level | Skill |
-| --- | --- |
-| Beginner | Refuse equal or earlier beacon times |
-| Intermediate | Shape-check randomness (64 hex) and signature length |
-| Masterclass | Optional expectedDigest vs real BLS verification gap |
+# Education — drand as a time-locked beacon
 
 ## Beginner
 
-Open a bet at `betTs`. A beacon is acceptable only if `publishedTs > betTs`. Same second is **not** after.
+A bet at time T may only accept a public randomness beacon published **strictly after** T. That stops grinding a known past round.
 
 ## Intermediate
 
-`assertBeaconShape` enforces round bounds and hex formats. `verifyAndResolve` freezes randomness onto the bet once.
+The lab checks:
 
-## Masterclass
+1. Time ordering (`publishedTs > betTs`).
+2. Randomness length (32 bytes hex).
+3. Optional digest equality as a **stand-in** for signature verify.
+4. Once-only resolve.
 
-`beaconDigest` is sha256 of round|randomness|signature for teaching. Production must verify League of Entropy BLS signatures (see [drand.love](https://drand.love/)). This lab never claims that.
+It does **not** run BLS verification.
 
-## Will not teach
+## Masterclass (not in this repo)
 
-Live HTTP fetch of drand, real BLS pairing, or replacing orng.wax on WAX.
+- Real BLS12-381 verify against the drand public key.
+- Fetching the beacon from the League of Entropy API.
+- Mapping randomness into a game payout.
+
+## Outcomes
+
+1. Refuse equal and earlier timestamps.
+2. State that "bad signature" here means digest mismatch, not cryptography.
+3. Refuse a second resolve.
