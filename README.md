@@ -1,11 +1,14 @@
-# Drand beacon timing and digest gate
+# Drand beacon gate (strictly after the bet)
 
-Open bet, accept only post-bet beacons, optional digest match, once-resolve. Pure TypeScript; not live League of Entropy.
+Educational acceptance rule: a randomness beacon is usable only if `publishedTs` is strictly after `betTs`. Digest check is a stand-in, not live BLS.
 
 | Doc | Role |
 | --- | --- |
-| [EDUCATION.md](EDUCATION.md) | Why after-bet |
-| [WORKED-EXAMPLES.md](WORKED-EXAMPLES.md) | Tables |
+| [EDUCATION.md](EDUCATION.md) | Beginner → masterclass |
+| [WORKED-EXAMPLES.md](WORKED-EXAMPLES.md) | T0 tables |
+| [TIPS.md](TIPS.md) | Fairness tips |
+| [SECURITY.md](SECURITY.md) | Gaps |
+| [SOURCES.md](SOURCES.md) | drand + orng |
 
 ```bash
 npm test

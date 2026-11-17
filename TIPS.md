@@ -1,5 +1,18 @@
-# Tips
+# Tips — drand post-bet gate
 
-- Never accept a beacon with publishedTs ≤ betTs — same-second leakage is a fairness bug.
-- Resolve is once-only; store randomness on the bet row before any payout math.
-- Real deployments need actual BLS verification against the current group public key; this lab only models the time and digest gates.
+## Do
+
+- Require `publishedTs > betTs` (strict).  
+- Resolve once per bet.  
+- Map randomness with rejection sampling before a game modulus.  
+- Document that production must verify BLS against the published chain key.
+
+## Don't
+
+- Accept the beacon the player could already see.  
+- Treat a matching local digest as a network proof.  
+- Skip orng on WAX just because drand is public.
+
+## Related
+
+[orng dual-callback](https://github.com/pixel-journey/px-orng-dual-callback-idempotent) · [TAPOS](https://github.com/pixel-journey/px-rng-fallback-future-block-tapos) · [Solana price gate](https://github.com/pixel-journey/px-rng-crosschain-solana-pyth) · [loot CDF](https://github.com/pixel-journey/px-orng-weighted-loot-table-cdf)
