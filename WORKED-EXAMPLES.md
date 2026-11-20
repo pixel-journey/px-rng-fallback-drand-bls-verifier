@@ -14,12 +14,19 @@ Phase `open`, round null. Player `Bad` / betTs `-1` refused.
 | T0 (exact) | `not after bet` |
 | T0 - 1 | `not after bet` |
 
-`expectedDigest` wrong → `bad signature`. Matching `beaconDigest(beacon)` accepts.
-
-Second resolve → `already resolved`. Short randomness `abcd` → `bad randomness`.
+| Check | Result |
+| --- | --- |
+| `expectedDigest` wrong | `bad signature` |
+| matching `beaconDigest(beacon)` | accepted |
+| second resolve | `already resolved` |
+| short randomness `abcd` | `bad randomness` |
 
 ## uint32FromRandomness
 
 `0000002a` + 28 bytes of `11` → **0x2a**.
 
-Teaching gate only — not a live BLS verify against the League of Entropy network.
+## Product facts
+
+- **Strict inequality:** `publishedTs > betTs` (same second is refused).
+- Digest compare is a **teaching stand-in** for signature verification — not League of Entropy BLS.
+- Prefer `orng.wax` on WAX when available; this is the public-beacon fallback path.
