@@ -18,4 +18,4 @@
 | [quorum](https://github.com/pixel-journey/px-rng-fallback-multi-oracle-quorum) | M-of-N reports |
 | [commit-reveal](https://github.com/pixel-journey/px-rng-fallback-commit-reveal) | Bonded house reveal |
 | [Solana facade](https://github.com/pixel-journey/px-rng-crosschain-solana-pyth) | Same strict post-bet time idea |
-| [ORNG path](https://github.com/pixel-journey/px-contract-examples-vault/blob/main/docs/ORNG-LEARNING-PATH.md) | Section E — prefer orng |
+| `px-contract-examples-vault` (private index; not this public course) | Section E — prefer orng |

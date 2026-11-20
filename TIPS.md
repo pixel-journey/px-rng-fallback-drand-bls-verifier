@@ -32,4 +32,4 @@ Prefer [orng.wax](https://github.com/worldwide-asset-exchange/wax-orng) on WAX m
 | Round-number commit at bet | Player picks future round; still enforce time |
 | Game book after accept | [dice](https://github.com/pixel-journey/px-orng-dice-multi-tier-payout) / [loot CDF](https://github.com/pixel-journey/px-orng-weighted-loot-table-cdf) |
 
-Related: [dual-callback](https://github.com/pixel-journey/px-orng-dual-callback-idempotent) · [TAPOS](https://github.com/pixel-journey/px-rng-fallback-future-block-tapos) · [Solana facade](https://github.com/pixel-journey/px-rng-crosschain-solana-pyth) · [ORNG path](https://github.com/pixel-journey/px-contract-examples-vault/blob/main/docs/ORNG-LEARNING-PATH.md)
+Related: [dual-callback](https://github.com/pixel-journey/px-orng-dual-callback-idempotent) · [TAPOS](https://github.com/pixel-journey/px-rng-fallback-future-block-tapos) · [Solana facade](https://github.com/pixel-journey/px-rng-crosschain-solana-pyth) · `px-contract-examples-vault` (private index; not this public course)
