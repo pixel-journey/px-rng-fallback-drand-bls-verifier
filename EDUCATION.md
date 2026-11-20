@@ -5,9 +5,9 @@
 
 A bet at time `betTs` may only accept a beacon whose `publishedTs` is **strictly later**. Same-second beacons are a fairness bug: the player could have seen the randomness before placing the bet.
 
-Prefer [wax-orng](https://github.com/worldwide-asset-exchange/wax-orng) on WAX when available. This lab is the **public randomness fallback** with a time gate.
+Prefer [wax-orng](https://github.com/worldwide-asset-exchange/wax-orng) on WAX when available. Official: [RNG tutorial](https://docs.wax.io/build/tutorials/create-wax-rng-smart-contract/rng_sample). This lab is the **public randomness fallback** with a time gate.
 
-Siblings: [TAPOS](https://github.com/pixel-journey/px-rng-fallback-future-block-tapos), [commit-reveal](https://github.com/pixel-journey/px-rng-fallback-commit-reveal), [quorum](https://github.com/pixel-journey/px-rng-fallback-multi-oracle-quorum), [Solana price gate](https://github.com/pixel-journey/px-rng-crosschain-solana-pyth) (same strict-after idea).
+Siblings: [TAPOS](https://github.com/pixel-journey/px-rng-fallback-future-block-tapos) · [commit-reveal](https://github.com/pixel-journey/px-rng-fallback-commit-reveal) · [quorum](https://github.com/pixel-journey/px-rng-fallback-multi-oracle-quorum).
 
 ## Learning outcomes
 
@@ -31,6 +31,12 @@ Siblings: [TAPOS](https://github.com/pixel-journey/px-rng-fallback-future-block-
 
 Player name `Bad` or betTs `-1` refused on open.
 
+```bash
+npm test
+```
+
+---
+
 ## Intermediate
 
 | Check | Result |
@@ -40,6 +46,17 @@ Player name `Bad` or betTs `-1` refused on open.
 | second resolve | `already resolved` |
 | short randomness `abcd` | `bad randomness` |
 | `uint32FromRandomness` of `0000002a` + rest | **0x2a** |
+
+### Attack → test
+
+| Attack | Lab behavior |
+| --- | --- |
+| Beacon at exact betTs | `not after bet` |
+| Beacon before bet | `not after bet` |
+| Wrong digest | `bad signature` |
+| Second resolve | already resolved |
+
+---
 
 ## Masterclass — honesty
 
@@ -60,15 +77,25 @@ The lab compares a digest you pass to a digest computed from the beacon object. 
 
 ### Nice-to-have extensions (not in this repo)
 
-- Real BLS verify against the quicknet or default chain public key.  
-- Round number > last accepted round (not only timestamp).  
-- Unbias mapping via [loot CDF](https://github.com/pixel-journey/px-orng-weighted-loot-table-cdf) / [byte-slicer](https://github.com/pixel-journey/px-orng-byte-slicer-multi-roll).  
-- Fallback order: try orng, then drand, then TAPOS.
-
-Numbers: [WORKED-EXAMPLES.md](WORKED-EXAMPLES.md).
+| Idea | Note |
+| --- | --- |
+| Real BLS verify (quicknet / default) | Host crypto + public key |
+| Round number > last accepted | Not only timestamp |
+| Unbias mapping | [loot CDF](https://github.com/pixel-journey/px-orng-weighted-loot-table-cdf) / [byte-slicer](https://github.com/pixel-journey/px-orng-byte-slicer-multi-roll) |
+| Fallback order | try orng → drand → TAPOS |
 
 ### Exercises
 
-1. Exact betTs — accept or refuse? (Refuse.)  
-2. First four bytes `0000002a` — uint32? (0x2a)  
+1. Exact betTs — accept or refuse? (**Refuse**.)  
+2. First four bytes `0000002a` — uint32? (**0x2a**.)  
 3. Is this a live BLS verify? (No.)
+
+Numbers: [WORKED-EXAMPLES.md](WORKED-EXAMPLES.md) · [SECURITY](SECURITY.md) · [SOURCES](SOURCES.md).
+
+---
+
+## What this course will not teach
+
+- Live League of Entropy API calls
+- Real BLS verification
+- That digest equality equals cryptographic signature validity
